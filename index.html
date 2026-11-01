@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts (Playfair Display & Inter) -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,600&display=swap" rel="stylesheet">
@@ -73,13 +73,16 @@
 <body class="bg-cream-100 text-stone-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-600 selection:text-white">
 
     <!-- 1. YÜKLEME EKRANI -->
-    <div id="splash-screen" class="fixed inset-0 z-50 bg-stone-900 flex flex-col items-center justify-center transition-opacity duration-700">
-        <h1 class="glow-ripple font-serif text-3xl md:text-5xl font-bold tracking-wider text-brand-500 px-4 text-center">
-            Sadabat Taş Fırın Lezzetleri
-        </h1>
-        <p class="mt-3 text-cream-200 text-sm font-medium tracking-widest uppercase">Odun Ateşinde Geleneksel Tatlar Yükleniyor...</p>
-        <div class="w-48 bg-stone-700 h-1 rounded-full mt-8 overflow-hidden">
-            <div class="bg-brand-500 h-full w-full origin-left animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+    <div id="splash-screen" class="fixed inset-0 z-50 bg-stone-900 bg-cover bg-center flex flex-col items-center justify-center transition-opacity duration-700" style="background-image: url('https://avatars.mds.yandex.net/get-altay/19756885/2a0000019dcf4e2c26590f7e6c6e04b954bf/orig');">
+        <div class="absolute inset-0 bg-stone-950/80 backdrop-blur-sm"></div>
+        <div class="relative z-10 flex flex-col items-center px-4 text-center">
+            <h1 class="glow-ripple font-serif text-3xl md:text-5xl font-bold tracking-wider text-brand-500 mb-2">
+                Sadabat Taş Fırın Lezzetleri
+            </h1>
+            <p class="text-cream-200 text-sm font-medium tracking-widest uppercase">Yükleniyor...</p>
+            <div class="w-48 bg-stone-700/60 h-1 rounded-full mt-8 overflow-hidden backdrop-blur-md">
+                <div class="bg-brand-500 h-full w-full origin-left animate-[pulse_1.5s_ease-in-out_infinite]"></div>
+            </div>
         </div>
     </div>
 
@@ -98,19 +101,22 @@
                     </div>
                 </div>
 
-                <!-- 2 Sekmeli Desktop Navbar -->
+                <!-- Desktop Navbar -->
                 <nav class="hidden md:flex space-x-2">
                     <button onclick="switchTab('menu')" id="nav-btn-menu" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 bg-brand-800 text-white shadow-md">
                         <i class="fa-solid fa-utensils"></i> Menü & Karşılama
+                    </button>
+                    <button onclick="switchTab('evaluation')" id="nav-btn-evaluation" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold text-stone-700 hover:text-brand-900 hover:bg-stone-100 transition-all flex items-center gap-2">
+                        <i class="fa-solid fa-star-half-stroke"></i> Etkinlik Değerlendirme
                     </button>
                     <button onclick="switchTab('contact')" id="nav-btn-contact" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold text-stone-700 hover:text-brand-900 hover:bg-stone-100 transition-all flex items-center gap-2">
                         <i class="fa-solid fa-location-dot"></i> Konum & İletişim
                     </button>
                 </nav>
 
-                <a href="tel:+902120000000" class="hidden sm:flex items-center gap-2 bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-500/30 px-3 py-2 rounded-lg text-xs font-bold transition-all">
+                <a href="tel:+905067170078" class="hidden sm:flex items-center gap-2 bg-brand-50 hover:bg-brand-100 text-brand-900 border border-brand-500/30 px-3 py-2 rounded-lg text-xs font-bold transition-all">
                     <i class="fa-solid fa-phone text-brand-700"></i>
-                    <span>Sipariş: (0212) 000 00 00</span>
+                    <span>Sipariş: 0506 717 00 78</span>
                 </a>
 
                 <div class="md:hidden flex items-center">
@@ -121,10 +127,13 @@
             </div>
         </div>
 
-        <!-- Mobil Menü (2 Sekme) -->
+        <!-- Mobil Menü -->
         <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-stone-200 px-4 pt-2 pb-4 space-y-2">
             <button onclick="switchTab('menu')" id="mob-nav-btn-menu" class="w-full text-left px-4 py-3 rounded-lg text-base font-semibold flex items-center gap-3 bg-brand-800 text-white">
                 <i class="fa-solid fa-utensils"></i> Menü & Karşılama
+            </button>
+            <button onclick="switchTab('evaluation')" id="mob-nav-btn-evaluation" class="w-full text-left px-4 py-3 rounded-lg text-base font-semibold text-stone-700 hover:bg-stone-100 flex items-center gap-3">
+                <i class="fa-solid fa-star-half-stroke text-brand-700"></i> Etkinlik Değerlendirme
             </button>
             <button onclick="switchTab('contact')" id="mob-nav-btn-contact" class="w-full text-left px-4 py-3 rounded-lg text-base font-semibold text-stone-700 hover:bg-stone-100 flex items-center gap-3">
                 <i class="fa-solid fa-location-dot text-brand-700"></i> Konum & İletişim
@@ -137,16 +146,15 @@
         <!-- 1. SEKME: MENÜ & KARŞILAMA -->
         <section id="tab-menu" class="tab-content active">
             
-            <div class="relative min-h-[450px] md:min-h-[550px] flex items-center justify-center bg-cover bg-center overflow-hidden" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1920&q=80');">
+            <div class="relative min-h-[450px] md:min-h-[550px] flex items-center justify-center bg-cover bg-center overflow-hidden" style="background-image: url('https://i.pinimg.com/1200x/9a/55/dc/9a55dcc0af24ad05f76206bf8bb3363a.jpg');">
                 <div class="absolute inset-0 bg-gradient-to-t from-brand-900/90 via-brand-900/75 to-brand-900/60"></div>
                 
                 <div class="relative z-10 max-w-4xl mx-auto text-center px-4 py-12">
                     <span class="inline-block bg-white/20 text-cream-100 border border-white/30 px-4 py-1 rounded-full text-xs font-semibold tracking-wider uppercase mb-4 backdrop-blur-sm">
                         Geleneksel Odun Ateşi
                     </span>
-                    <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-4">
-                        Taş Fırından Masanıza Ulaşan <br>
-                        <span class="text-cream-200">Eşsiz Lezzet Şöleni</span>
+                    <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-extrabold text-white leading-tight mb-6">
+                        Sadabat Enderun Taş Fırın Lezzetleri
                     </h1>
                     
                     <div class="h-8 mb-8">
@@ -159,8 +167,8 @@
                         <a href="#menu-catalog" class="bg-white hover:bg-cream-100 text-brand-900 font-bold px-8 py-3.5 rounded-full shadow-lg transition-all hover:scale-105 flex items-center justify-center gap-2">
                             <i class="fa-solid fa-book-open"></i> Menüyü Keşfet
                         </a>
-                        <button onclick="switchTab('contact')" class="bg-brand-800/80 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full border border-white/20 backdrop-blur-sm transition-all flex items-center justify-center gap-2">
-                            <i class="fa-solid fa-diamond-turn-right"></i> Yol Tarifi Al
+                        <button onclick="switchTab('evaluation')" class="bg-brand-800/80 hover:bg-brand-800 text-white font-semibold px-8 py-3.5 rounded-full border border-white/20 backdrop-blur-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-star-half-stroke"></i> Etkinliği Değerlendir
                         </button>
                     </div>
                 </div>
@@ -168,34 +176,47 @@
 
             <div id="menu-catalog" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <div class="text-center mb-12">
-                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-900 mb-2">Özel Fırın ve Izgara Menümüz</h2>
-                    <p class="text-stone-600 max-w-xl mx-auto">En taze malzemeler ve ustalıkla hazırlanan geleneksel lezzetlerimizi inceleyebilirsiniz.</p>
+                    <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-900 mb-2">Özel Taş Fırın ve Izgara Menümüz</h2>
+                    <p class="text-stone-600 max-w-xl mx-auto">Taze malzemeler ve ustalıkla hazırlanan zengin menümüzü keşfedin.</p>
                     <div class="w-24 h-1 bg-gradient-to-r from-transparent via-brand-700 to-transparent mx-auto mt-4"></div>
                 </div>
 
-                <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
-                    <button onclick="filterMenu('all')" class="cat-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-800 text-white shadow-md" data-category="all">
-                        Tüm Ürünler
-                    </button>
-                    <button onclick="filterMenu('pide')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="pide">
-                        <i class="fa-solid fa-bread-slice text-brand-700 mr-1.5"></i> Pide Çeşitleri
-                    </button>
-                    <button onclick="filterMenu('izgara')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="izgara">
-                        <i class="fa-solid fa-drumstick-bite text-brand-700 mr-1.5"></i> Izgara Çeşitleri
-                    </button>
-                    <button onclick="filterMenu('doner')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="doner">
-                        <i class="fa-solid fa-fire text-brand-700 mr-1.5"></i> Döner Çeşitleri
-                    </button>
-                    <button onclick="filterMenu('tatli')" class="cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="tatli">
-                        <i class="fa-solid fa-cookie-bite text-brand-700 mr-1.5"></i> Tatlı & İçecekler
-                    </button>
+                <!-- Kategori Butonları -->
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10">
+                    <button onclick="filterMenu('all')" class="cat-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-brand-800 text-white shadow-md" data-category="all">Tümü</button>
+                    <button onclick="filterMenu('pide')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="pide">Pide Çeşitleri</button>
+                    <button onclick="filterMenu('izgara')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="izgara">Izgara Çeşitleri</button>
+                    <button onclick="filterMenu('doner')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="doner">Döner Çeşitleri</button>
+                    <button onclick="filterMenu('tavuk_dunyasi')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="tavuk_dunyasi">Tavuk Dünyası</button>
+                    <button onclick="filterMenu('tepsi')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="tepsi">Tepsi & Special</button>
+                    <button onclick="filterMenu('geleneksel')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="geleneksel">Geleneksel Lezzetler</button>
+                    <button onclick="filterMenu('tatli')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="tatli">Tatlı Çeşitleri</button>
+                    <button onclick="filterMenu('icecek')" class="cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm" data-category="icecek">İçecekler</button>
                 </div>
 
                 <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
             </div>
         </section>
 
-        <!-- 2. SEKME: KONUM VE İLETİŞİM -->
+        <!-- 2. SEKME: ETKİNLİK DEĞERLENDİRME (YENİ) -->
+        <section id="tab-evaluation" class="tab-content max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <div class="glass-card rounded-3xl p-8 md:p-12 border border-stone-200 shadow-xl text-center">
+                <div class="w-16 h-16 rounded-2xl bg-brand-50 text-brand-800 flex items-center justify-center text-2xl mx-auto mb-6 border border-brand-200 shadow-inner">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                </div>
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-900 mb-4">Sadabat Gıda Etkinliğimizi Değerlendirin</h2>
+                <p class="text-stone-600 text-base md:text-lg max-w-2xl mx-auto mb-8 leading-relaxed">
+                    Düzenlediğimiz etkinlik ve lezzetlerimiz hakkındaki görüşleriniz, deneyimimizi daha da ileriye taşımamız için bizim için çok değerlidir. Lütfen anket formumuzu doldurarak değerli fikirlerinizi bizimle paylaşın.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://forms.gle/JNtPLqgoaoW9gSmYA" target="_blank" class="bg-brand-800 hover:bg-brand-900 text-white font-bold px-8 py-4 rounded-full shadow-lg transition-all hover:scale-105 flex items-center gap-3 text-base">
+                        <i class="fa-solid fa-pen-to-square"></i> Değerlendirme Formunu Doldur
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. SEKME: KONUM VE İLETİŞİM -->
         <section id="tab-contact" class="tab-content max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
             <div class="text-center mb-10">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-brand-900">Bizimle İletişime Geçin</h2>
@@ -211,8 +232,8 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-brand-900 text-lg">Adresimiz</h3>
-                                <p class="text-stone-600 text-sm mt-1">Aydınlıkevler, Rüstem Paşa Cd. No:31, Karabük</p>
-                                <a href="https://maps.google.com" target="_blank" class="inline-flex items-center gap-1 text-xs text-brand-700 hover:text-brand-900 font-bold mt-3">
+                                <p class="text-stone-600 text-sm mt-1">Aydınlıkevler, Rüstem Paşa Cd. No:31, 78100 Karabük Merkez/Karabük</p>
+                                <a href="https://share.google/tcwkbiXecWfospsZX" target="_blank" class="inline-flex items-center gap-1 text-xs text-brand-700 hover:text-brand-900 font-bold mt-3">
                                     Haritada Aç <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
                                 </a>
                             </div>
@@ -226,9 +247,8 @@
                             </div>
                             <div>
                                 <h3 class="font-semibold text-brand-900 text-lg">Telefon & Sipariş</h3>
-                                <p class="text-stone-600 text-sm mt-1">Alo Sipariş: (0212) 000 00 00</p>
-                                <p class="text-stone-600 text-sm">GSM / WhatsApp: (0532) 000 00 00</p>
-                                <a href="tel:+902120000000" class="inline-flex items-center gap-2 bg-brand-800 hover:bg-brand-900 text-white font-bold px-4 py-2 rounded-lg text-xs mt-3 transition-colors shadow-sm">
+                                <p class="text-stone-600 text-sm mt-1">0506 717 00 78</p>
+                                <a href="tel:+905067170078" class="inline-flex items-center gap-2 bg-brand-800 hover:bg-brand-900 text-white font-bold px-4 py-2 rounded-lg text-xs mt-3 transition-colors shadow-sm">
                                     <i class="fa-solid fa-phone-flip"></i> Hemen Ara
                                 </a>
                             </div>
@@ -254,9 +274,9 @@
                 <div class="lg:col-span-2 glass-card rounded-2xl overflow-hidden border border-stone-200 shadow-sm min-h-[400px] flex flex-col">
                     <div class="p-4 bg-white border-b border-stone-200 flex items-center justify-between">
                         <span class="text-sm font-bold text-brand-900 flex items-center gap-2">
-                            <i class="fa-solid fa-map-location-dot text-brand-700"></i> Sadabat Taş Fırın Canlı Harita
+                            <i class="fa-solid fa-map-location-dot text-brand-700"></i> Sadabat Enderun Canlı Harita
                         </span>
-                        <a href="https://maps.google.com" target="_blank" class="bg-brand-50 text-brand-800 border border-brand-200 hover:bg-brand-800 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
+                        <a href="https://share.google/tcwkbiXecWfospsZX" target="_blank" class="bg-brand-50 text-brand-800 border border-brand-200 hover:bg-brand-800 hover:text-white px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5">
                             <i class="fa-solid fa-diamond-turn-right"></i> Navigasyonu Başlat
                         </a>
                     </div>
@@ -267,7 +287,7 @@
                             allowfullscreen="" 
                             loading="lazy" 
                             referrerpolicy="no-referrer-when-downgrade"
-                            title="Sadabat Taş Fırın Lezzetleri Harita Konumu">
+                            title="Sadabat Enderun Taş Fırın Lezzetleri Harita Konumu">
                         </iframe>
                     </div>
                 </div>
@@ -279,11 +299,11 @@
     <!-- ALT BİLGİ -->
     <footer class="bg-brand-900 text-cream-100 border-t border-brand-800 mt-12 py-8 text-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:flex sm:justify-between sm:items-center">
-            <p>&copy; 2026 Sadabat Taş Fırın Lezzetleri. Tüm hakları saklıdır.</p>
+            <p>&copy; 2026 Sadabat Taş Fırın Lezzetleri. Bu site Hüseyin Eren Ergün tarafından oluşturulmuştur.</p>
             <div class="flex justify-center space-x-6 mt-4 sm:mt-0 text-cream-200">
                 <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram text-lg"></i></a>
                 <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook text-lg"></i></a>
-                <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp text-lg"></i></a>
+                <a href="https://wa.me/905067170078" target="_blank" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp text-lg"></i></a>
             </div>
         </div>
     </footer>
@@ -291,93 +311,86 @@
     <!-- JAVASCRIPT -->
     <script>
         const menuData = [
-            {
-                id: 1,
-                title: "Kuşbaşılı Kaşarlı Pide",
-                category: "pide",
-                price: "280 TL",
-                description: "Özel marine edilmiş dana kuşbaşı, erimiş kaşar peyniri ve odun ateşinin eşsiz aroması.",
-                image: "https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 2,
-                title: "Kıymalı Geleneksel Pide",
-                category: "pide",
-                price: "240 TL",
-                description: "Özel baharatlarla yoğrulmuş kıyma, domates ve biber harcı ile hazırlanan fırın klasiği.",
-                image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 3,
-                title: "Trabzon Tereyağlı Karadeniz Pidesi",
-                category: "pide",
-                price: "260 TL",
-                description: "Bol özel peynirli ve üzerine gezdirilen organik Trabzon tereyağı ile enfes lezzet.",
-                image: "https://images.unsplash.com/photo-1541745537411-b8046dc6d66c?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 4,
-                title: "Adana Kebap",
-                category: "izgara",
-                price: "320 TL",
-                description: "Zırhtan çekilmiş koyun eti, özel baharatlar, közlenmiş biber ve domates eşliğinde.",
-                image: "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 5,
-                title: "Karışık Izgara Tabağı",
-                category: "izgara",
-                price: "450 TL",
-                description: "Adana kebap, tavuk şiş, ızgara köfte ve pirzola ile muazzam bir ziyafet tabağı.",
-                image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 6,
-                title: "Odun Ateşinde Tavuk Şiş",
-                category: "izgara",
-                price: "260 TL",
-                description: "Özel soslu göğüs ve but etleri, meze ve sıcak pide eşliğinde servis edilir.",
-                image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 7,
-                title: "Yaprak Et Döner Porsiyon",
-                category: "doner",
-                price: "340 TL",
-                description: "%100 dana ve kuzu etinden yaprak döner, pirinç pilavı ve patates kızartması ile.",
-                image: "https://images.unsplash.com/photo-1662116765994-1e223e35b7fc?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 8,
-                title: "İskender Döner",
-                category: "doner",
-                price: "380 TL",
-                description: "Fırınlanmış taze pidesi, özel domates sosu, kızgın tereyağı ve keçi sütü yoğurdu ile.",
-                image: "https://images.unsplash.com/photo-1529042410759-befb1204b468?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 9,
-                title: "Fırın Sütlaç (Taş Fırın)",
-                category: "tatli",
-                price: "110 TL",
-                description: "Odun fırınında üzeri nar gibi kızarmış, taze günlük sütten geleneksel sütlaç.",
-                image: "https://images.unsplash.com/photo-1579372786545-d24232daf58c?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                id: 10,
-                title: "Antep Fıstıklı Künefe",
-                category: "tatli",
-                price: "160 TL",
-                description: "Sıcak ve çıtır kadayıf, erimiş özel künefe peyniri ve bol Antep fıstığı kaplaması.",
-                image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80"
-            }
+            // PİDE ÇEŞİTLERİ
+            { title: "Kıymalı Pide", category: "pide", description: "Geleneksel kıymalı harç ile hazırlanan taş fırın pidesi.", image: "https://static.wixstatic.com/media/881847_46dc5a50924f410996cad538cc019d66~mv2.jpg/v1/fill/w_752,h_422,al_c,lg_1,q_80,enc_avif,quality_auto/881847_46dc5a50924f410996cad538cc019d66~mv2.jpg" },
+            { title: "Kıymalı Kaşarlı Pide", category: "pide", description: "Özel kıymalı harç ve uzayan erimiş kaşar peynirli lezzet.", image: "https://www.mirzausta.com/wp-content/uploads/2021/01/unnamed-3.jpg" },
+            { title: "Sucuklu Pide", category: "pide", description: "Nefis fırınlanmış dilim sucuklu taş fırın pidesi.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYX-ZMIZmhmMPvZaKd6JvLdIcS2sPQ5Upr-wJmB6IODw&s=10" },
+            { title: "Sucuklu Kaşarlı Pide", category: "pide", description: "Bol kaşar peyniri ve kaliteli sucuk dilimleri.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUCDEMbPwUi6M_gus6lnb_dXgpfR3UhZzi0qpwXZ7pVYnwJEnBuRRsi_E&s=10" },
+            { title: "Kaşarlı Pide", category: "pide", description: "Odun ateşinde nar gibi kızarmış bol kaşarlı pide.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlUaxjRA5jFJ429rGAUrBwjHljkij1lb-RQpuMSuT5KA&s=10" },
+            { title: "Dönerli Pide (Tavuk + Kaşar)", category: "pide", description: "Tavuk döner ve kaşar peynirinin fırındaki mükemmel uyumu.", image: "https://www.meshurdurumaspava.com/wp-content/uploads/Kapali-Donerli-Pide.jpg" },
+            { title: "Karışık Pide", category: "pide", description: "Kıyma, kuşbaşı, sucuk ve kaşar peyniri bir arada.", image: "https://files.pidem.prod.hebiar.com/content/product/img/PIDEM-WEB-SITESI-KARISIK-PIDEM-1200X1200px.jpg" },
+            { title: "Kuşbaşılı Pide", category: "pide", description: "Özel marine edilmiş dana kuşbaşı etli taş fırın pidesi.", image: "https://konyatandir.com.tr/wp-content/uploads/2016/07/kk.jpg" },
+            { title: "Kuşbaşılı Kaşarlı Pide", category: "pide", description: "Yumuşacık kuşbaşı et ve lezzetli erimiş kaşar peyniri.", image: "https://kastamonuetliekmek.com.tr/wp-content/uploads/2025/03/kusbasi-kasarli-pide-scaled.jpg" },
+            { title: "Trabzon Pidesi", category: "pide", description: "Karadeniz usulü bol peynirli ve tereyağlı özel pide.", image: "https://www.nizampide.com/wp-content/uploads/2018/07/trabzon-peynirli-yumurtal%C4%B1-pide-nizam-pide-s%C3%BCtla%C3%A7-istanbul-beyo%C4%9Flu-3.jpg" },
+
+            // IZGARA ÇEŞİTLERİ
+            { title: "Adana Dürüm", category: "izgara", description: "Zırh kıymasından özel baharatlı Adana kebap dürüm.", image: "https://images.deliveryhero.io/image/fd-tr/LH/b3tc-hero.jpg" },
+            { title: "Adana Porsiyon", category: "izgara", description: "Közlenmiş biber, domates ve pilav eşliğinde Adana kebap.", image: "https://resatefendi.com/wp-content/uploads/2026/09/1776950408150.webp" },
+            { title: "Köfte Ekmek Arası", category: "izgara", description: "Mangalda pişmiş ızgara köfteler çıtır ekmek arasında.", image: "https://seymenogluetkofte.com/public/assets/img/kofte-ekmek-arasi.webp" },
+            { title: "Köfte Porsiyon", category: "izgara", description: "Özel harçlı ızgara köfteler garnitür ile servis edilir.", image: "https://www.ustadonerci.com/media/products/5li-kofte-porsiyon.png" },
+            { title: "Köfte Kg (Servis)", category: "izgara", description: "Kilo ile hazırlanan lezzetli ızgara köfte servisi.", image: "https://cdn.cimri.io/market/260x260/reyondan-1-kg-butcher-izgara-kofte-_609695.jpg" },
+            { title: "Tavuk Şiş Dürüm", category: "izgara", description: "Soslu tavuk şiş parçaları taze lavaş arasında.", image: "https://imgrosetta.yemek.com/file/16852/16852-1250x833.jpg" },
+            { title: "Tavuk Şiş Porsiyon", category: "izgara", description: "Mangal ateşinde lokum gibi pişmiş tavuk şiş.", image: "https://beylitasfirin.com/tema/genel/uploads/urunler/tavuk-sis.jpg" },
+            { title: "Tavuk Kanat (6 Adet)", category: "izgara", description: "Özel marineli çıtır közde tavuk kanatları.", image: "https://elitlife.com.tr/panel/upload/menuler/menuler-0-2-1752951155.jpg" },
+            { title: "Tavuk Çıtır (3 Adet)", category: "izgara", description: "Çıtır dış kaplamalı lezzetli tavuk parçaları.", image: "https://karekodrestaurantmenu.com/Pictures/2a87d179-c4ff-4f6a-b4c7-bcb685bee1cb.jpg" },
+            { title: "Tavuk Lokum", category: "izgara", description: "Yumuşacık marine tavuk pirzola lokum etler.", image: "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?auto=format&fit=crop&w=600&q=80" },
+            { title: "Kuzu Şiş Dürüm", category: "izgara", description: "Yumuşak kuzu eti parçaları taze dürüm içerisinde.", image: "https://durumcuisausta.com/wp-content/uploads/2024/05/ciger-sis-durum-b-69d8-1.webp" },
+            { title: "Kuzu Şiş Porsiyon", category: "izgara", description: "Özel terbiye edilmiş kuzu şiş lokum lezzet.", image: "https://tasdelenkebap.com.tr/uploads/images/category_kuzu-sis_63cfa3ea95011.webp" },
+            { title: "Pirzola (200gr)", category: "izgara", description: "Közde pişirilmiş sulu kuzu pirzola.", image: "https://i.lezzet.com.tr/images-xxlarge-recipe/mangal-lezzetini-eve-tasiyan-izgara-pirzola-tarifi-5498efba-b03f-4b4e-945e-6e37d42d9fa1.jpg" },
+            { title: "Beyti Kebap", category: "izgara", description: "Lavaşa sarılı, domates soslu ve yoğurtlu özel beyti.", image: "https://i.lezzet.com.tr/images-xxlarge-recipe/beyti-kebap-tarifi-64f99b0e-5695-4569-aaea-f11989e76339.jpg" },
+            { title: "Et Burger (Patates + Kola)", category: "izgara", description: "Ev yapımı et köfte, çıtır patates ve soğuk kola menüsü.", image: "https://enjoyburgerhouse.com/upload/products/classic-et-burger-menu-1777452942.png" },
+            { title: "Tavuk Burger (Patates + Kola)", category: "izgara", description: "Çıtır tavuk burger, patates kızartması ve kola menüsü.", image: "https://goldenchickens.com.tr/wp-content/uploads/2026/03/CHEDDAR.png" },
+
+            // DÖNER ÇEŞİTLERİ
+            { title: "Tavuk Döner Porsiyon (120gr)", category: "doner", description: "Pirinç pilavı ve patates ile lezzetli tavuk döner.", image: "https://www.hassosdoner.com/tema/genel/uploads/urunler/09-tavuk-doner-pors.jpg" },
+            { title: "Tavuk Döner Dürüm (90gr)", category: "doner", description: "Taze lavaş içerisinde özel soslu tavuk döner dürüm.", image: "https://peradoner.com.tr/wp-content/uploads/2024/04/tavuk_doner_durum.webp" },
+            { title: "Tavuk Döner Kilo", category: "doner", description: "Kilo ile sipariş verebileceğiniz nefis tavuk döner.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQUS6iPMNTBSI2F9tZsvduMMMUOvuNmmxXUZX02nauQ&s=10" },
+            { title: "Hatay Usulü Tavuk Döner", category: "doner", description: "Özel soslu ve sarımsaklı mayonezli Hatay dürüm.", image: "https://imgrosetta.yemek.com/file/22759/22759-1250x833.jpg" },
+            { title: "Zurna Hatay Usulü (Kaşarlı)", category: "doner", description: "Dev zurna boy, erimiş kaşarlı özel Hatay usulü döner.", image: "https://yemeksepeti.dhmedia.io/image/fd-tr/products/7830248.jpg?width=577.5&height=577.5" },
+            { title: "Tavuk İskender (150gr)", category: "doner", description: "Tereyağlı, domates soslu ve yoğurtlu tavuk iskender.", image: "https://www.ustadonerci.com/media/products/yogurtlu_tavuk_doner_b-2017.png" },
+
+            // TAVUK DÜNYASI
+            { title: "Tavuk Dünyası (Barbekü Soslu)", category: "tavuk_dunyasi", description: "Nefis barbekü soslu tavuk parçaları, makarna ve salata.", image: "https://onlinesiparis.tavukdunyasi.com/Storage/ProductDocument/15356652d9_Barbekus-678x427px.png" },
+            { title: "Tavuk Dünyası (Mantarlı)", category: "tavuk_dunyasi", description: "Kremalı ve mantarlı özel tavuk sote sunumu.", image: "https://www.tavukdunyasi.com/media/drjf4chc/kremantar-900x430px.png?format=webp" },
+            { title: "Tavuk Dünyası (Körili)", category: "tavuk_dunyasi", description: "Köri sosuyla harmanlanmış yumuşak tavuk parçaları.", image: "https://www.tavukdunyasi.com/media/5yobmloo/bi-kori-detay.png?format=webp" },
+            { title: "Tavuk Dünyası (Ranch Soslu)", category: "tavuk_dunyasi", description: "Ranch soslu özel lezzetli tavuk tabağı.", image: "https://www.tavukdunyasi.com/media/f05f3j1o/peynirlim-650x250px.png?format=webp" },
+
+            // TEPSİ & SPECIAL MENÜLER
+            { title: "Tepsi - 1", category: "tepsi", description: "Adana(2), Köfte(12), Tavuk Şiş(2), Kuzu Şiş(2), Kanat(6), Pirzola(4), Çıtır(4), Pilav & Salata.", image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80" },
+            { title: "Tepsi - 2", category: "tepsi", description: "Adana(2), Köfte(8), Tavuk Şiş(1), Kuzu Şiş(1), Kanat(6), Çıtır(4), Pilav & Salata.", image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" },
+            { title: "Sadabat Special", category: "tepsi", description: "Çıtır(4), Tavuk Lokum(3), Tavuk Şiş(1), Kanat(6), Pilav, Salata ve Tavuk Döner(150gr).", image: "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=600&q=80" },
+
+            // GELENEKSEL LEZZETLER
+            { title: "Kelle Paça Çorbası", category: "geleneksel", description: "Sarımsaklı ve limonlu şifa kaynağı taze kelle paça.", image: "https://image.hurimg.com/i/hurriyet/90/0x0/6a16e87cd000e1f873ff5900.jpg" },
+            { title: "Mantı Porsiyon", category: "geleneksel", description: "Bol etli ev mantısı, sarımsaklı yoğurt ve nane sosu.", image: "https://aysetugbasengel.com/wp-content/uploads/2020/11/manti.jpg" },
+            { title: "Mantı KG", category: "geleneksel", description: "Kilo ile hazırlanan lezzetli ev mantısı.", image: "https://www.carmar.com.tr/idea/ei/75/myassets/products/328/c-manti-kg-11142413.jpeg?revision=1740376606" },
+            { title: "Ispanaklı Börek", category: "geleneksel", description: "Çıtır el açması taze ıspanaklı börek.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZj0Nw36AbLIDG-u2946PSHY2kBHehN7e6aIckrbzsxcybZqqpko4PLP4&s=10" },
+
+            // TATLI ÇEŞİTLERİ
+            { title: "Meyveli Cup Tatlılar", category: "tatli", description: "Taze meyveler ve hafif krema katmanlı kup tatlısı.", image: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80" },
+            { title: "Ekler", category: "tatli", description: "Çikolata kaplı taze krema dolgulu ekler pasta.", image: "https://imgrosetta.mynet.com.tr/file/9975304/9975304-900x900.jpg" },
+            { title: "Cocostar Tatlısı", category: "tatli", description: "Hindistan cevizi ve çikolata kaplamalı enfes lezzet.", image: "https://www.kevserinmutfagi.com/wp-content/uploads/2020/06/cocostar_pasta3-600x450.jpg" },
+            { title: "Tiramisu", category: "tatli", description: "İtalyan usulü kahve aromalı yumuşak tiramisu.", image: "https://d17wu0fn6x6rgz.cloudfront.net/img/w/tarif/mgt/tiramisu_40_11zon.webp" },
+            { title: "Malaga", category: "tatli", description: "Muzlu ve çikolatalı özel Malaga dilim pasta.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSh7ST8zy6mi6Bh1IDUScGSx3KXsTDjA2x_B7bY7gkEGbb-E7b_ODWfQ2z4&s=10" },
+            { title: "Cheesecake", category: "tatli", description: "Özel soslu, kıvamında pişmiş taze cheesecake.", image: "https://i.nefisyemektarifleri.com/2025/02/19/en-kolay-cheesecake-14.jpg" },
+            { title: "Rulo Pasta", category: "tatli", description: "Yumuşacık kek ve krema dolgulu rulo pasta.", image: "https://panel.beyazfirin.com/customimage/0/640/Urun/00009/00009824_pagwihhnm5kis.jpg" },
+            { title: "Sütlaç", category: "tatli", description: "Taş fırında üzeri nar gibi kızarmış fırın sütlaç.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0zcjRa3xR8wIJoiiSzwd9rZ8mqUuJsIhVcVTtcaCfzzwd8N_pYSxDWMer&s=10" },
+            { title: "Magnolia", category: "tatli", description: "Bisküvi ve taze meyveli kremalı magnolia tatlısı.", image: "https://assets.tmecosys.com/image/upload/t_web_rdp_recipe_584x480_1_5x/img/recipe/ras/Assets/7b469d4538bb9e2667c540f6c0310f33/Derivates/2cab109c744bce1e7184ce92905d1ecf8295ed08.jpg" },
+            { title: "Baklava (Tane)", category: "tatli", description: "Çıtır yufkalı, bol fıstıklı veya cevizli baklava.", image: "https://static.ticimax.cloud/59771/Uploads/UrunResimleri/buyuk/cevizli-baklava-75a90e.jpg" },
+            { title: "Kadayıf", category: "tatli", description: "Geleneksel çıtır şerbetli kadayıf tatlısı.", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7wXOFACF4s-K-Zjr05qmrhrUVGsAZqdGGJdAAY9_QXCnHsyQ5hCZGSeg&s=10" },
+
+            // İÇECEKLER
+            { title: "Osmanlı Şerbeti", category: "icecek", description: "Geleneksel baharatlar ve meyvelerle hazırlanan serinletici şerbet.", image: "https://static.wixstatic.com/media/a1dcae_0c3160fa9fab49c68a8dec71d0ee28f9~mv2.png/v1/fill/w_980,h_653,al_c,q_90,usm_0.66_1.00_0.01,enc_avif,quality_auto/a1dcae_0c3160fa9fab49c68a8dec71d0ee28f9~mv2.png" },
+            { title: "Ev Yapımı Limonata", category: "icecek", description: "Taze sıkılmış ferahlatıcı limonata.", image: "https://konyatandir.com.tr/wp-content/uploads/2025/07/limonata.jpeg" },
+            { title: "Açık / Kapalı Ayran", category: "icecek", description: "Serinletici bol köpüklü ayran.", image: "https://cdn.myikas.com/images/6ef55593-355c-4359-945c-170207ed40e9/c73ba700-dc4b-44f2-9f00-24290b336d0f/1080/acik-ayran.webp" },
+            { title: "Sarıyer Fanta / Kola", category: "icecek", description: "Kutu ve şişe gazlı içecek seçenekleri.", image: "https://cdn-s3.pttavm.com/pimages/592/153/395/b3eff3b0-68fb-41a9-8cef-26f474ac075c.webp" }
         ];
 
         const typingPhrases = [
             "Geleneksel Odun Ateşinde Pişen Lezzetler...",
             "Çıtır Çıtır Taş Fırın Pideleri...",
             "Zırh Kıymasından Gerçek Adana Kebap...",
-            "Yaprak Et Döner ve Özel Soslar..."
+            "Tavuk Dünyası ve Zengin Tatlı Çeşitleri..."
         ];
 
         let currentPhraseIdx = 0;
@@ -404,8 +417,7 @@
             const target = document.getElementById('tab-' + tabId);
             if (target) target.classList.add('active');
 
-            // Nav buton stillerini güncelle
-            ['menu', 'contact'].forEach(id => {
+            ['menu', 'evaluation', 'contact'].forEach(id => {
                 const btn = document.getElementById('nav-btn-' + id);
                 const mobBtn = document.getElementById('mob-nav-btn-' + id);
                 if (btn) {
@@ -438,16 +450,13 @@
                 card.innerHTML = `
                     <div class="relative h-48 overflow-hidden">
                         <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
-                        <span class="absolute top-3 right-3 bg-brand-900/90 text-cream-100 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold shadow-md">
-                            ${item.price}
-                        </span>
                     </div>
                     <div class="p-5 flex flex-col flex-grow">
                         <h3 class="font-serif font-bold text-xl text-brand-900 mb-2">${item.title}</h3>
                         <p class="text-stone-600 text-sm mb-4 flex-grow">${item.description}</p>
                         <div class="pt-3 border-t border-stone-100 flex items-center justify-between">
-                            <span class="text-xs font-semibold text-brand-700 uppercase tracking-wider">${item.category}</span>
-                            <a href="tel:+902120000000" class="text-xs font-bold text-brand-800 hover:text-brand-600 flex items-center gap-1">
+                            <span class="text-xs font-semibold text-brand-700 uppercase tracking-wider">${item.category.replace('_', ' ')}</span>
+                            <a href="tel:+905067170078" class="text-xs font-bold text-brand-800 hover:text-brand-600 flex items-center gap-1">
                                 Sipariş Ver <i class="fa-solid fa-chevron-right text-[10px]"></i>
                             </a>
                         </div>
@@ -459,11 +468,11 @@
 
         function filterMenu(category) {
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.className = "cat-btn px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm";
+                btn.className = "cat-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-white text-stone-700 hover:bg-stone-50 border border-stone-200 shadow-sm";
             });
             const activeBtn = document.querySelector(`.cat-btn[data-category="${category}"]`);
             if (activeBtn) {
-                activeBtn.className = "cat-btn active px-5 py-2.5 rounded-full text-sm font-semibold transition-all bg-brand-800 text-white shadow-md";
+                activeBtn.className = "cat-btn active px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-brand-800 text-white shadow-md";
             }
             renderMenu(category);
         }
